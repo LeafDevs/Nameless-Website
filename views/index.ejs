@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Nameless | Homepage</title>
+    <link id="theme" rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/colors.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kenia&family=Protest+Riot&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <wrapper>
+        <center>
+            <header>
+                <red id="reddot">⬤</red>
+                <yellow id="yellowdot">⬤</yellow>
+                <green id="greendot">⬤</green>
+                <h2 id="text">Nameless &copy; 2024</h2>
+                <div id="slider">
+                    <input type="checkbox" id="checkbox">
+                    <label for="checkbox">Toggle</label>
+                  </div>
+            </header>
+            <img src="images/logo.png" style="height: 150px; width: auto;">
+
+            <p style="margin-top: 25px;">Nameless is a clothing brand focused on those who feel left out.</p>
+
+            <p>We feel the need to help those who dont feel they are acknowledged.</p>
+
+            <p >and for an afforable price.</p>
+
+            <a href="/careers" style="margin-bottom: 25px;">CAREERS</a><br>
+            <a href="/shop"style="margin-bottom: 25px;">SHOP</a><br>
+            <a href="/contact">CONTACT</a>
+        </center>
+    </wrapper>
+</body>
+
+<script>
+
+const toggleLightClass = () => {
+  const elements = document.querySelectorAll('*');
+
+  elements.forEach(element => {
+    if(element.classList.contains('light')) {
+      element.classList.remove('light');
+    } else {  
+      element.classList.add('light');
+    }
+  });
+}
+
+
+    </script>
+
+</html>
