@@ -12,9 +12,9 @@ app.get('/', (req, res) => {
 });
 
 
-// app.get('/careers', (req, res) => {
-//     res.render('careers.ejs');
-// })
+app.get('/careers', (req, res) => {
+    res.render('careers.ejs');
+})
 
 // app.get('/about', (req, res) => {
 //     res.render('about.ejs');

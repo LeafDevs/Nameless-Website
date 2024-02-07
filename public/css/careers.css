@@ -1,0 +1,29 @@
+careers {
+    display: flex;
+    flex-direction: column;
+    margin-top: 220px;
+}
+
+careers p {
+    position: relative;
+    display: inline-block;
+    font-family: 'Munchkin Cream', sans-serif;
+    font-size: 2em;
+    font-weight: 800;
+    color: royalblue;
+    overflow: hidden;
+    background: linear-gradient(to right, #FF0000, #FF0000 50%, #cf0000 50%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    background-position: 100%;
+    transition: background-position 655ms ease;
+    cursor: pointer;
+}
+
+careers p:hover {
+  background-position: 0%;
+}
+
+

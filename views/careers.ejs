@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Nameless | Careers</title>
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/colors.css">
+        <link rel="stylesheet" href="css/careers.css">
+    </head>
+    <body>
+        <wrapper>
+            <center>
+                <header>
+                    <red id="reddot">⬤</red>
+                    <yellow id="yellowdot">⬤</yellow>
+                    <green id="greendot">⬤</green>
+                    <h2 id="text">Nameless &copy; 2024</h2>
+                </header>
+                <careers>
+                    <p id="backend">BACKEND DEVELOPER</p>
+                    <p id="photo">PHOTOGRAPHER</p>
+                    <p id="graphic">GRAPHIC DESIGNER</p>
+                </careers>
+            </center>
+        </wrapper>
+    </body>
+    <script>
+const toggleLightClass = () => {
+  const elements = document.querySelectorAll('*');
+
+  elements.forEach(element => {
+    if(element.classList.contains('light')) {
+      element.classList.remove('light');
+    } else {  
+      element.classList.add('light');
+    }
+  });
+}
+
+const ids = ["backend", "photo", "graphic"];
+
+ids.forEach((id) => {
+    document.getElementById(id).addEventListener('click', (event) => {
+        console.log("Yep")
+    })
+})
+
+
+
+
+toggleLightClass()
+    </script>
+</html>
