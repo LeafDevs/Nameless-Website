@@ -1,52 +1,85 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Nameless | Careers</title>
-        <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="css/colors.css">
-        <link rel="stylesheet" href="css/careers.css">
-    </head>
-    <body>
-        <wrapper>
-            <center>
-                <header>
-                    <red id="reddot">⬤</red>
-                    <yellow id="yellowdot">⬤</yellow>
-                    <green id="greendot">⬤</green>
-                    <h2 id="text">Nameless &copy; 2024</h2>
-                </header>
-                <careers>
-                    <p id="backend">BACKEND DEVELOPER</p>
-                    <p id="photo">PHOTOGRAPHER</p>
-                    <p id="graphic">GRAPHIC DESIGNER</p>
-                </careers>
-            </center>
-        </wrapper>
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nameless | Careers</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/colors.css">
+    <link rel="stylesheet" href="css/careers.css">
+</head>
+<body>
+    <wrapper>
+        <center>
+            <header>
+                <red id="reddot">⬤</red>
+                <yellow id="yellowdot">⬤</yellow>
+                <green id="greendot">⬤</green>
+                <h2 id="text">Nameless &copy; 2024</h2>
+            </header>
+            <careers>
+                <div class="career-wrapper">
+                    <p id="backend" class="career">BACKEND DEVELOPER</p>
+                    <description>
+                        Help
+                    </description>
+                </div>
+                <div class="career-wrapper">
+                    <p id="photo" class="career">PHOTOGRAPHER</p>
+                    <description>
+                        Help
+                    </description>
+                </div>
+                <div class="career-wrapper">
+                    <p id="graphic" class="career">GRAPHIC DESIGNER</p>
+                    <description>
+                        Help
+                    </description>
+                </div>
+            </careers>
+            
+        </center>
+    </wrapper>
     <script>
-const toggleLightClass = () => {
-  const elements = document.querySelectorAll('*');
+        const toggleLightClass = () => {
+            const elements = document.querySelectorAll('*');
 
-  elements.forEach(element => {
-    if(element.classList.contains('light')) {
-      element.classList.remove('light');
-    } else {  
-      element.classList.add('light');
-    }
-  });
-}
+            elements.forEach(element => {
+                if(element.classList.contains('light')) {
+                    element.classList.remove('light');
+                } else {  
+                    element.classList.add('light');
+                }
+            });
+        }
 
-const ids = ["backend", "photo", "graphic"];
+        const careers = document.querySelector('careers');
+        const descriptions = document.querySelectorAll('description');
 
-ids.forEach((id) => {
-    document.getElementById(id).addEventListener('click', (event) => {
-        console.log("Yep")
-    })
-})
+        careers.addEventListener('click', (event) => {
+            if (event.target.classList.contains('career')) {
+                const descriptions = document.querySelectorAll('.career');
+                const descriptionTags = document.querySelectorAll('description');
+
+                descriptions.forEach((element) => {
+                    element.classList.toggle('slide');
+                });
+
+                descriptionTags.forEach((element) => {
+                    if (element.classList.contains('show')) {
+                        element.classList.remove('show');
+                    }
+                });
+
+                const description = event.target.nextElementSibling;
+                description.classList.add('show'); // Adding 'show' class instead of toggling
+            }
+        });
 
 
 
-
-toggleLightClass()
+        toggleLightClass();
     </script>
+</body>
 </html>
