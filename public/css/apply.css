@@ -1,0 +1,145 @@
+@font-face {
+    font-family: 'Amore';
+    src: url('../fonts/Adequate-ExtraLight.ttf') format('truetype'); 
+  }
+  
+  @font-face {
+    font-family: 'Munchkin Cream';
+    src: url('../fonts/Intro\ Cond\ Black\ Free.otf') format('opentype'); 
+  }
+  
+  careers {
+      display: flex;
+      flex-direction: column;
+      margin-top: 30px;
+  }
+  
+  
+  careers h1 {
+    font-family: 'Munchkin Cream', sans-serif;
+    font-size: 2em;
+    font-weight: 800;
+    left:250px;
+    color: royalblue;
+    overflow: hidden;
+    background: linear-gradient(to right, #FF0000, #FF0000 50%, #cf0000 50%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    background-position: 100%;
+    transition: background-position 655ms ease, transform 1s ease;
+    cursor: pointer;
+    z-index: 1;
+    margin-bottom: 45px;
+  }
+  
+  careers h1:hover {
+    background-position: 0%;
+  }
+  
+  
+  careers h1.slide {
+    transform: translateX(-250px);
+  }
+
+  careers a.slide {
+    transform: translateX(-250px);
+  }
+  
+  .career-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  careers description {
+    opacity: 0;
+    width: 600px;
+    left: 0;
+    height: auto;
+    margin-left: 25px;
+    background-color: rgb(228, 228, 228);
+    transition: left 1s ease, opacity 750ms ease;
+    position: absolute;
+    z-index: 0;
+  }
+  
+  careers description.show {
+    left: 300px;
+    opacity: 1;
+  }
+  
+  
+  careers description h2 {
+    font-size: 20px;
+    color: #303030
+  }
+  
+  careers description h3 {
+    font-size: 14px;
+    margin-top: 12px;
+  }
+  
+  a {
+    position: relative;
+    display: inline-block;
+    font-family: 'Munchkin Cream', sans-serif;
+    font-size: 1.75em;
+    font-weight: 800;
+    color: royalblue;
+    overflow: hidden;
+    cursor: pointer;
+    background: linear-gradient(to right, #f04141, #f04141 50%, #BE3144 50%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    background-position: 100%;
+    transition: background-position 655ms ease, transform 1s ease;;
+    margin-top: 125px;
+  }
+  a:hover {
+    background-position: 0;
+  }
+ 
+
+
+  button.submit {
+    position: relative;
+    display: inline-block;
+    font-family: 'Munchkin Cream', sans-serif;
+    font-size: 1.75em;
+    font-weight: 800;
+    color: royalblue;
+    overflow: hidden;
+    cursor: pointer;
+    background: linear-gradient(to right, #f04141, #f04141 50%, #BE3144 50%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    background-position: 100%;
+    transition: background-position 655ms ease;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    outline: none;
+    border: none;
+  }
+  button.submit:hover {
+    background-position: 0;
+  }
+
+
+
+  input {
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #cf0000;
+    background-color: rgb(228, 228, 228);
+    transition: border-bottom 356ms ease;
+  }
+
+  input:focus {
+    border-bottom: 4px solid #e70000;
+  }

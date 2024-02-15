@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nameless | Careers</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/colors.css">
+    <link rel="stylesheet" href="css/apply.css">
+</head>
+<body>
+    <wrapper>
+        <center>
+            <header>
+                <red id="reddot">⬤</red>
+                <yellow id="yellowdot">⬤</yellow>
+                <green id="greendot">⬤</green>
+                <h2 id="text">Nameless &copy; 2024</h2>
+            </header>
+            <img src="images/logo.png" style="height: 150px; width: auto;">
+            <careers>
+                <div class="career-wrapper">
+                    <h1 id="backend" style="z-index: 3;" class="career">APPLY</h1>
+                    <description style="z-index: 1;">
+                        <h2>Question - Answer</h2>
+                        <h3>What position are you going for? - <input type="text" id="pos"></h3>
+                        <h3>What is your name? - <input type="text" id="name"></h3>
+                        <h3>What is your phone number? - <input type="text" id="phone"></h3>
+                        <h3>What is your email? - <input type="text" id="email"></h3>
+                        <h3>Do you have a portfolio? If so share it. - <input type="text" id="port"></h3>
+
+                        <button onclick="submitApplication()" class="submit">SUBMIT</button>
+                    </description>
+                </div>
+                <div class="career-wrapper">
+                    <h1 href="/" style="z-index: 0;" class="career" id="home">HOME</h1>
+                </div>
+                <div class="career-wrapper">
+                    <h1 href="/" class="career" style="z-index: 0;" id="careers">CAREERS</h1>
+                </div>
+            </careers>
+        </center>
+    </wrapper>
+    <script>
+        const toggleLightClass = () => {
+            const elements = document.querySelectorAll('*');
+
+            elements.forEach(element => {
+                if(element.classList.contains('light')) {
+                    element.classList.remove('light');
+                } else {  
+                    element.classList.add('light');
+                }
+            });
+        }
+
+
+        toggleLightClass();
+    </script>
+    <script src="scripts/apply.js"></script>
+</body>
+</html>

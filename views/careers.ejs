@@ -18,27 +18,37 @@
                 <green id="greendot">⬤</green>
                 <h2 id="text">Nameless &copy; 2024</h2>
             </header>
+            <img src="images/careers.png" style="height: 150px; width: auto;">
             <careers>
                 <div class="career-wrapper">
-                    <p id="backend" class="career">BACKEND DEVELOPER</p>
+                    <h1 id="backend" class="career">BACKEND DEVELOPER</h1>
                     <description>
-                        Help
+                        <h2>Requirements:</h2>
+                        <h3>You must be flexible and able to test your backend code along with being able to debug it.</h3>
+                        <h3>You must be skilled in backend developement</h3>
+                        <h3>You must have the ability to respond when needed and work with others.</h3>
                     </description>
                 </div>
                 <div class="career-wrapper">
-                    <p id="photo" class="career">PHOTOGRAPHER</p>
+                    <h1 id="photo" class="career">PHOTOGRAPHER</h1>
                     <description>
-                        Help
+                        <h2>Requirements:</h2>
+                        <h3>You must be able to be flexible and be able to change a design easily.</h3>
+                        <h3>You must be skilled in graphic design</h3>
+                        <h3>You must have the ability to respond when needed and work with others.</h3>
                     </description>
                 </div>
                 <div class="career-wrapper">
-                    <p id="graphic" class="career">GRAPHIC DESIGNER</p>
+                    <h1 id="graphic" class="career">GRAPHIC DESIGNER</h1>
                     <description>
-                        Help
+                        <h2>Requirements:</h2>
+                        <h3>You must be able to be flexible and be able to change a design easily.</h3>
+                        <h3>You must be skilled in graphic design</h3>
+                        <h3>You must have the ability to respond when needed and work with others.</h3>
                     </description>
                 </div>
+                <h1 style="margin-top: 125px; font-size: 1.6em;" id="applybtn">APPLICATIONS</h1>
             </careers>
-            
         </center>
     </wrapper>
     <script>
@@ -56,26 +66,51 @@
 
         const careers = document.querySelector('careers');
         const descriptions = document.querySelectorAll('description');
+    
+    
+        const applybtn = document.getElementById("applybtn");
+
+        applybtn.addEventListener('click', (event) => {
+            document.location.href="/apply"
+        })
 
         careers.addEventListener('click', (event) => {
-            if (event.target.classList.contains('career')) {
-                const descriptions = document.querySelectorAll('.career');
-                const descriptionTags = document.querySelectorAll('description');
+        if (event.target.classList.contains('career')) {
+            const descriptions = document.querySelectorAll('.career');
+            const descriptionTags = document.querySelectorAll('description');
 
-                descriptions.forEach((element) => {
-                    element.classList.toggle('slide');
-                });
+            descriptions.forEach((element) => {
+                element.classList.add('slide');
+            });
 
-                descriptionTags.forEach((element) => {
-                    if (element.classList.contains('show')) {
-                        element.classList.remove('show');
-                    }
-                });
+            descriptionTags.forEach((element) => {
+                if (element !== event.target.nextElementSibling && element.classList.contains('show')) {
+                    element.classList.remove('show');
+                }
+            });
 
-                const description = event.target.nextElementSibling;
-                description.classList.add('show'); // Adding 'show' class instead of toggling
+            const description = event.target.nextElementSibling;
+            description.classList.toggle('show');
+
+            let i = 0;
+            descriptionTags.forEach((element) => {
+                if(!element.classList.contains("show")) {
+                    i++;
+            
+                }
+            })
+
+            if(i==3) {
+                descriptions.forEach((desc) => {
+                    desc.classList.remove('slide');
+                })
             }
-        });
+
+        }
+    });
+
+
+
 
 
 

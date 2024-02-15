@@ -1,11 +1,21 @@
+@font-face {
+  font-family: 'Amore';
+  src: url('../fonts/Adequate-ExtraLight.ttf') format('truetype'); 
+}
+
+@font-face {
+  font-family: 'Munchkin Cream';
+  src: url('../fonts/Intro\ Cond\ Black\ Free.otf') format('opentype'); 
+}
+
 careers {
     display: flex;
     flex-direction: column;
-    margin-top: 220px;
+    margin-top: 30px;
 }
 
 
-careers p {
+careers h1 {
   font-family: 'Munchkin Cream', sans-serif;
   font-size: 2em;
   font-weight: 800;
@@ -21,14 +31,15 @@ careers p {
   transition: background-position 655ms ease, transform 1s ease;
   cursor: pointer;
   z-index: 1;
+  margin-bottom: 45px;
 }
 
-careers p:hover {
+careers h1:hover {
   background-position: 0%;
 }
 
 
-careers p.slide {
+careers h1.slide {
   transform: translateX(-250px);
 }
 
@@ -42,15 +53,48 @@ careers description {
   opacity: 0;
   width: 500px;
   left: 0;
-  height: 250px;
+  height: auto;
   margin-left: 25px;
-  background-color: rgb(122, 122, 122);
+  background-color: rgb(228, 228, 228);
   transition: left 1s ease, opacity 750ms ease;
   position: absolute;
   z-index: 0;
 }
 
 careers description.show {
-  left: 300px;
-  opacity: 1;
+  left: 400px;
+  opacity: 0.7;
+}
+
+
+careers description h2 {
+  font-size: 20px;
+  color: #303030
+}
+
+careers description h3 {
+  font-size: 14px;
+  margin-top: 12px;
+}
+
+a {
+  position: relative;
+  display: inline-block;
+  font-family: 'Munchkin Cream', sans-serif;
+  font-size: 1.75em;
+  font-weight: 800;
+  color: royalblue;
+  overflow: hidden;
+  cursor: pointer;
+  background: linear-gradient(to right, #f04141, #f04141 50%, #BE3144 50%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 100%;
+  background-position: 100%;
+  transition: background-position 655ms ease;
+  margin-top: 125px;
+}
+a:hover {
+  background-position: 0;
 }

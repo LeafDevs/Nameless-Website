@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Nameless | Homepage</title>
+    <link id="theme" rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/colors.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+
+<body>
+    <wrapper>
+        <center>
+            <header>
+                <red id="reddot">⬤</red>
+                <yellow id="yellowdot">⬤</yellow>
+                <green id="greendot">⬤</green>
+                <h2 id="text">Nameless &copy; 2024</h2>
+            </header>
+            <img src="images/login.png" style="height: 150px; width: auto;">
+
+            <h3>Username - <input type="text" id="user"></h3>
+            <h3>Password - <input type="text" id="pass"></h3>
+            <button onclick="submit()" class="submit">SUBMIT</button>
+            </div>
+        </center>
+    </wrapper>
+</body>
+
+<script>
+
+    const toggleLightClass = () => {
+        const elements = document.querySelectorAll('*');
+
+        elements.forEach(element => {
+            if (element.classList.contains('light')) {
+                element.classList.remove('light');
+            } else {
+                element.classList.add('light');
+            }
+        });
+    }
+
+    const addLightClass = () => {
+        const elements = document.querySelectorAll('*');
+
+        elements.forEach(element => {
+            element.classList.add('light');
+        });
+    }
+
+    toggleLightClass()
+
+    const submit = async () => {
+        const user = document.getElementById('user').value;
+        const pass = document.getElementById('pass').value;
+
+        const id = String.valueOf(249866);
+
+        let data = {
+            username: user,
+            password: pass,
+            id: '249866',
+        }
+
+        const resp = await fetch('/api/v1/auth', {
+        method: 'POST',
+        body: JSON.stringify({
+            data
+          }),
+        headers: {
+            "Content-Type": "application/json",
+        }
+    }).then(res => res.json());
+        if (resp.success) {
+            document.body.innerHTML = resp.html;
+            addLightClass();
+        }
+    }
+
+
+</script>
+
+</html>
