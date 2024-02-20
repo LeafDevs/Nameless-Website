@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Nameless | Homepage</title>
+    <link id="theme" rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/colors.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="css/careers.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kenia&family=Protest+Riot&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <wrapper>
+        <center>
+            <header>
+                <red id="reddot">⬤</red>
+                <yellow id="yellowdot">⬤</yellow>
+                <green id="greendot">⬤</green>
+                <h2 id="text">Nameless &copy; 2024</h2>
+            </header>
+            <img src="images/logo.png" style="height: 150px; width: auto;">
+            <br>
+            <img id="blank">
+            <h3>Email - <input type="input" id="email"></h3>
+            <h3>Username - <input type="text" id="user"></h3>
+            <h3>Password - <input type="text" id="pass"></h3>
+
+            <button onclick="submit()" class="submit">SUBMIT</button>
+
+            
+        </center>
+    </wrapper>
+</body>
+
+<script>
+
+const toggleLightClass = () => {
+  const elements = document.querySelectorAll('*');
+
+  elements.forEach(element => {
+    if(element.classList.contains('light')) {
+      element.classList.remove('light');
+    } else {  
+      element.classList.add('light');
+    }
+  });
+}
+
+toggleLightClass()
+
+    const submit = async () => {
+        const pass = document.getElementById('pass').value;
+        const user = document.getElementById('user').value
+        const email = document.getElementById('email').value;
+
+        const authKey = '<%=authKey%>';
+
+        const data = {
+            name: user,
+            email: email,
+            password: pass,
+            auth: authKey
+        }
+
+        const resp = await fetch('/register', {
+            method: 'POST',
+            body: JSON.stringify({
+                data
+            }),
+            headers: {
+                "Content-Type": "application/json",
+            }
+        }).then(res => res.json());
+
+
+        document.getElementById('blank').src=resp.qrCode
+
+
+        
+    }
+
+
+    </script>
+
+</html>
