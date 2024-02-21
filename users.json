@@ -1,9 +1,14 @@
-[
-    {
+{
+    "leaf": {
         "id": 1,
-        "name": "fd",
-        "email": "fd",
-        "password": "fd",
-        "secret": "GRGDKYLEHJUE6KLXJI3XURSMI4WFOMTU"
+        "username": "leaf",
+        "password": "root",
+        "email": "root",
+        "secret": {
+            "ascii": "/6U4]D?CaTTCd2[5*f03",
+            "hex": "2f3655345d443f436154544364325b352a663033",
+            "base32": "F43FKNC5IQ7UGYKUKRBWIMS3GUVGMMBT",
+            "otpauth_url": "otpauth://totp/SecretKey?secret=F43FKNC5IQ7UGYKUKRBWIMS3GUVGMMBT"
+        }
     }
-]
+}

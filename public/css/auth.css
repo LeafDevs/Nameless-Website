@@ -1,0 +1,17 @@
+input {
+    background-color: rgb(228, 228, 228);
+    border: none;
+    border-bottom: 2px red solid;
+    outline: none;
+    color: black;
+    transition: border-bottom 120ms ease-in-out;
+    border-radius: 5px;
+}
+
+input:focus {
+    border-bottom: 4px red solid;
+}
+
+#err {
+    color: red
+}

@@ -2,38 +2,27 @@ const express = require('express');
 const app = express();
 const fs = require('node:fs');
 
-const { users, User } = require('./src/User');
-const speakeasy = require('speakeasy');
 const QRCode = require('qrcode');
 
+const speakeasy = require('speakeasy'); 
+
+const session = require('express-session');
+
 const bodyParser = require('body-parser');
+const { User } = require('./src/User');
 
-const authedIPS = [];
-
-
-exports.requireToken = (req, res, next) => {
-  const { token } = req.body;
-  // Find the user with the given email address
-  const user = users.find(u => u.email === req.user.email);
-  // Verify the user's token
-  const verified = speakeasy.totp.verify({
-    secret: user.secret,
-    encoding: 'base32',
-    token,
-    window: 1
-  });
-  if (!verified) {
-    return res.status(401).send('Invalid token');
-  }
-  // Token is valid, proceed to the next middleware or route handler
-  next();
-}
-
+app.use(session({
+  secret: 'your-secret-key', // Replace with a secure random string
+  resave: false,
+  saveUninitialized: true,
+}));
 
 
 let apikey = 'API-' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 
 console.log(apikey);
+
+let userSecrets = {};
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -47,6 +36,13 @@ app.get('/', (req, res) => {
   res.render('index.ejs');
 });
 
+
+function loadSecrets() {
+  let data = fs.readFileSync('secrets.json');
+  userSecrets = JSON.parse(data);
+}
+
+loadSecrets();
 
 app.get('/careers', (req, res) => {
   res.render('careers.ejs');
@@ -86,11 +82,15 @@ app.post('/api/v1/authip', (req, res) => {
 
 
 app.get('/auth', (req, res) => {
-  if (req.ip in authedIPS) return res.redirect('/applications/');
+  if(req.session.isAuthed) {
+    res.redirect('/applications');
+    return;
+  }
+
   res.render('auth.ejs');
 })
 
-app.get('/applications/:id', exports.requireToken, (req, res) => {
+app.get('/applications/:id', (req, res) => {
 
   let body = req.body;
   if (req.body.authed) {
@@ -107,53 +107,64 @@ app.get('/applications/:id', exports.requireToken, (req, res) => {
 
 
 app.post('/api/v1/auth', (req, res) => {
-  console.log(req.body)
-  if (req.body.data.username === 'admin' && req.body.data.password === 'admin') {
-    let html = fs.readFileSync('application.html');
-    let data = fs.readFileSync('applications.json');
-    let applications = JSON.parse(data);
-    console.log(applications);
-    console.log(applications[req.body.data.id]);
-    let application = applications[req.body.data.id]
-    console.log(application);
-    html = html.toString().replace('{name}', application.name);
-    html = html.toString().replace('{email}', application.email);
-    html = html.toString().replace('{phone}', application.phone);
-    html = html.toString().replace('{position}', application.position);
-    html = html.toString().replace('{portfolio}', application.portfolio);
+  const { username, password, token } = req.body.data;
 
+  console.log(req.body);
 
-    let body = {
-      html: html,
-      authed: true,
-      success: true,
-      ip: req.ip,
-      id: req.body.id,
-      username: req.body.username,
-      password: req.body.password,
-      port: req.body.port,
-      pos: req.body.pos,
-      name: req.body.name,
-      email: req.body.email,
-      phone: req.body.phone,
-      answers: req.body.answers,
-    }
+  const users = JSON.parse(fs.readFileSync('users.json'));
+  const user = users[username];
 
-    console.log(body);
-
-    res.json(body);
-
-  } else {
-    res.json({ success: false })
+  if (!user) {
+    res.json({message: 'Invalid Username or Password'});
+    return;
   }
+
+  if (user.password !== password) {
+    res.json({message: 'Invalid Username or Password'});
+    return;
+  }
+
+  if (token) {
+    const verified = speakeasy.totp.verify({
+      secret: user.secret.base32,
+      encoding: 'base32',
+      token: token,
+    });
+
+    if (!verified) {
+      res.json({message: 'Invalid 2FA token'});
+      return;
+    }
+  }
+
+  req.session.isAuthed = true;
+
+  res.json({ message: "Authorized Successfully" })
 })
 
 
+app.post('/verify-2fa', (req, res) => {
+  const userId = '1';
+  const userToken = req.body.token;
+  const secret = userSecrets[userId];
 
 
-// app.get('/about', (req, res) => {
-//     res.render('about.ejs');
-// });
+  if (secret) {
+    const verified = speakeasy.totp.verify({
+      secret: secret.base32,
+      encoding: 'base32',
+      token: userToken,
+    });
+
+    if (verified) {
+      res.send('2FA successfully verified');
+    } else {
+      res.status(401).send('Invalid 2FA token');
+    }
+  } else {
+    res.status(500).send('User secret not found');
+  }
+});
 
 
 
@@ -168,59 +179,40 @@ app.get('/register', (req, res) => {
   res.render('register.ejs', { authKey });
 })
 
-
 app.post('/register', (req, res) => {
-  const { name, email, password, auth } = req.body.data;
-  
+  const authKey = req.body.data.auth;
+  const username = req.body.data.username;
+  const password = req.body.data.password;
+  const email = req.body.data.email;
 
-  if (auth != apikey) {
-    res.status(401).send('Invalid Authorization')
-  }
-  console.log(name)
-  console.log(req.body)
+  console.log(req.body);
 
+  console.log(authKey + '\n' + apikey)
+
+  if(authKey !== apikey) return res.json({ err: 'Invalid auth key' });
 
   const secret = speakeasy.generateSecret({ length: 20 });
-  // Save the user data in the database
-  const user = new User(users.length + 1, name, email, password, secret.base32);
-  users.push(user);
-  console.log(users)
-  // Generate a QR code for the user to scan
-  QRCode.toDataURL(secret.otpauth_url, (err, image_data) => {
+
+  const otpAuthUrl = `otpauth://totp/Nameless?secret=${secret.base32}&issuer=Nameless`
+
+  let d = JSON.parse(fs.readFileSync('secrets.json'));
+
+  d[username] = secret;
+  fs.writeFileSync('secrets.json', JSON.stringify(d, null, 4));
+
+  const user = new User(Math.floor(Math.random() * 1000000), username, email, password, secret).save();
+
+  QRCode.toDataURL(otpAuthUrl, (err, data_url) => {
     if (err) {
-      console.error(err);
-      return res.status(500).send('Internal Server Error');
+      res.status(500).send('Error generating QR code');
+    } else {
+      res.json({ data_url, secret: secret.base32 });
     }
-    // Send the QR code to the user
-    res.send({ qrCode: image_data });
-  });
-  fs.writeFileSync('users.json', JSON.stringify(users, null, 4));
-});
-
-app.post('/login', (req, res) => {
-  const { email, password, token } = req.body;
-  // Find the user with the given email address
-  const user = users.find(u => u.email === email);
-  // Validate the user's credentials
-  if (!user || user.password !== password) {
-    return res.json({ err: 'Invalid credentials'});
-  }
-  // Verify the user's token
-  const verified = speakeasy.totp.verify({
-    secret: user.secret,
-    encoding: 'base32',
-    token,
-    window: 1
-  });
-  if (!verified) {
-    return res.json({ err: 'Invalid token'});
-  }
-  // User is authenticated
-  res.send('Login successful');
-});
+  })
 
 
 
+})
 
 
 

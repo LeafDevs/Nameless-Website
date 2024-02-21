@@ -21,13 +21,13 @@
                 <h2 id="text">Nameless &copy; 2024</h2>
             </header>
             <img src="images/logo.png" style="height: 150px; width: auto;">
-            <br>
-            <img id="blank">
-            <h3>Email - <input type="input" id="email"></h3>
-            <h3>Username - <input type="text" id="user"></h3>
-            <h3>Password - <input type="text" id="pass"></h3>
-
-            <button onclick="submit()" class="submit">SUBMIT</button>
+            <div id="kyu-kyu">
+                <h3>Email - <input type="input" id="email"></h3>
+                <h3>Username - <input type="text" id="user"></h3>
+                <h3>Password - <input type="text" id="pass"></h3>
+    
+                <button onclick="submit()" class="submit">SUBMIT</button>
+            </div>
 
             
         </center>
@@ -51,6 +51,8 @@ const toggleLightClass = () => {
 toggleLightClass()
 
     const submit = async () => {
+
+        console.log("submitted")
         const pass = document.getElementById('pass').value;
         const user = document.getElementById('user').value
         const email = document.getElementById('email').value;
@@ -64,6 +66,8 @@ toggleLightClass()
             auth: authKey
         }
 
+        console.log(data);
+
         const resp = await fetch('/register', {
             method: 'POST',
             body: JSON.stringify({
@@ -75,7 +79,15 @@ toggleLightClass()
         }).then(res => res.json());
 
 
-        document.getElementById('blank').src=resp.qrCode
+        console.log(resp);
+
+        document.getElementById('kyu-kyu').innerHTML = `
+        <br>
+        <h3>Scan the QR code using your Authy app or enter the following secret manually:</h3>
+        <h3>${resp.secret}</h3>
+        <br>
+        <img src="${resp.data_url}">
+        `
 
 
         

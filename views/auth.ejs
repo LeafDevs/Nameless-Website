@@ -5,7 +5,7 @@
     <title>Nameless | Homepage</title>
     <link id="theme" rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/colors.css">
-    <link rel="stylesheet" href="auth.css">
+    <link rel="stylesheet" href="css/auth.css">
 </head>
 
 <body>
@@ -18,9 +18,10 @@
                 <h2 id="text">Nameless &copy; 2024</h2>
             </header>
             <img src="images/login.png" style="height: 150px; width: auto;">
-
+            <h3 id="err"></h3>
             <h3>Username - <input type="text" id="user"></h3>
             <h3>Password - <input type="text" id="pass"></h3>
+            <h3>Token - <input type="text" id="token"></h3>
             <button onclick="submit()" class="submit">SUBMIT</button>
             </div>
         </center>
@@ -54,13 +55,14 @@
     const submit = async () => {
         const user = document.getElementById('user').value;
         const pass = document.getElementById('pass').value;
+        const token = document.getElementById('token').value;
 
         const id = String.valueOf(249866);
 
         let data = {
             username: user,
             password: pass,
-            id: '249866',
+            token: token,
         }
 
         const resp = await fetch('/api/v1/auth', {
@@ -72,10 +74,7 @@
             "Content-Type": "application/json",
         }
     }).then(res => res.json());
-        if (resp.success) {
-            document.body.innerHTML = resp.html;
-            addLightClass();
-        }
+        document.getElementById('err').innerHTML = resp.message;
     }
 
 
