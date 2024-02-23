@@ -1,0 +1,80 @@
+applications {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width:80%;
+    overflow-y: scroll; 
+    max-height: 700px;
+}
+
+application {
+    margin-top: 15px;
+    transition: background-color 250ms ease;
+    border-radius: 25px;
+}
+
+application:hover {
+    background-color: #dfdfdf;
+}
+
+application h1 {
+    font-size: 15pt;
+    color:black;
+    text-align: left;
+    margin-left: 15px;
+    z-index: 1;
+}
+
+application h2 {
+    font-size: 12pt;
+    color:black;
+    text-align: right;
+    margin-right: 15px;
+    z-index: 1;
+    margin-top: -35px;
+}
+
+button {
+    position: relative;
+    display: inline-block;
+    font-family: 'Munchkin Cream', sans-serif;
+    font-size: 2em;
+    font-weight: 800;
+    color: royalblue;
+    overflow: hidden;
+    background: linear-gradient(to right, #81abe7, #81abe7 50%, #6d98d6 50%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-decoration: none;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    background-position: 100%;
+    border: none;
+    outline: none;
+    transition: background-position 275ms ease;
+}
+button:hover {
+  background-position: 0 100%;
+}
+
+
+application questions {
+    display: block;
+    background-color: #dfdfdf;
+    opacity: 0;
+    transition: opacity 250ms ease, height 250ms ease;
+    height: 0;
+    border-radius: 0px 0px 25px 25px;
+    overflow: hidden;
+}
+
+application questions.show {
+    display: block;
+    height: 250px;
+    opacity: 1;
+}
+
+application.show {
+    background-color: #dfdfdf;
+}

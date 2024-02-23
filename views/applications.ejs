@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Nameless | Applications</title>
+    <link id="theme" rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/colors.css">
+    <link rel="stylesheet" href="css/applications.css">
+</head>
+
+<body>
+    <wrapper>
+        <center>
+            <header>
+                <red id="reddot">⬤</red>
+                <yellow id="yellowdot">⬤</yellow>
+                <green id="greendot">⬤</green>
+                <h2 id="text">Nameless &copy; 2024</h2>
+            </header>
+            <button onclick="refresh()">Refresh</button>
+            <applications id="applications">
+                
+            </applications>
+            </div>
+        </center>
+    </wrapper>
+</body>
+
+<script>
+
+
+
+
+    /**
+     * 
+     * @param {Boolean} refresh
+     * Loads all of the applications u can specify to refresh them or not.
+     */
+    const loadApplications = async (refresh=false) => {
+
+        const apps = await fetch('/api/v1/applications').then(res => res.json());
+
+        Object.keys(apps).forEach((app) => {
+            let a = apps[app];
+            let {name, phone, email, position, portfolio} = a;
+
+            let appFormat = 
+            `<application>
+                <h1>${name}'s Application</h1>
+                <h2>${position}</h2>
+                <questions>
+                    <h3>Question - Answer</h3>
+                    <h3>What is your Phone Number? - <blue>${phone}</blue></h3>
+                    <h3>What is your email? - <blue>${email}</blue></h3>
+                    <h3>Do you have a portfolio? If so share it here. - <blue>${portfolio}</blue></h3>
+                    <button>ACCEPT</button>
+                    <button>DELETE</button>
+                </questions>
+            </application>`
+
+            let b = document.getElementById('applications').innerHTML += appFormat;
+        })
+
+        const applications = document.querySelectorAll('application');
+
+        applications.forEach(app => {
+
+            app.addEventListener('click', (e) => {
+
+                if(e.target.closest('questions')) {
+                    return;
+                }
+
+                app.classList.toggle('show');
+                
+                const questions = app.querySelector('questions');
+                questions.classList.toggle('show');
+            });
+        });
+    }
+
+    loadApplications();
+
+    const toggleLightClass = () => {
+        const elements = document.querySelectorAll('*');
+
+        elements.forEach(element => {
+            if (element.classList.contains('light')) {
+                element.classList.remove('light');
+            } else {
+                element.classList.add('light');
+            }
+        });
+    }
+
+    const addLightClass = () => {
+        const elements = document.querySelectorAll('*');
+
+        elements.forEach(element => {
+            element.classList.add('light');
+        });
+    }
+
+    toggleLightClass()
+
+    const submit = async () => {
+        const user = document.getElementById('user').value;
+        const pass = document.getElementById('pass').value;
+        const token = document.getElementById('token').value;
+
+        const id = String.valueOf(249866);
+
+        let data = {
+            username: user,
+            password: pass,
+            token: token,
+        }
+
+        const resp = await fetch('/api/v1/auth', {
+        method: 'POST',
+        body: JSON.stringify({
+            data
+          }),
+        headers: {
+            "Content-Type": "application/json",
+        }
+    }).then(res => res.json());
+        document.getElementById('err').innerHTML = resp.message;
+    }
+
+
+</script>
+
+</html>

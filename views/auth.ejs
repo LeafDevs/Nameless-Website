@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Nameless | Homepage</title>
+    <title>Nameless | Login</title>
     <link id="theme" rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/colors.css">
     <link rel="stylesheet" href="css/auth.css">
@@ -74,6 +74,9 @@
             "Content-Type": "application/json",
         }
     }).then(res => res.json());
+        if(resp.message == 'Authorized Successfully') {
+            window.location.href='/applications'
+        }
         document.getElementById('err').innerHTML = resp.message;
     }
 

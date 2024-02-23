@@ -96,6 +96,7 @@
     -webkit-text-fill-color: transparent;
     background-size: 200% 100%;
     background-position: 100%;
+    text-decoration: none;
     transition: background-position 655ms ease, transform 1s ease;;
     margin-top: 125px;
   }

@@ -90,6 +90,25 @@ app.get('/auth', (req, res) => {
   res.render('auth.ejs');
 })
 
+app.get('/applications', (req, res) => {
+  if(req.session.isAuthed) {
+    res.render('applications.ejs');
+    return;
+  }
+  res.redirect('/auth');
+})
+
+app.get('/api/v1/applications', (req, res) => {
+  if(req.session.isAuthed) {
+    let data = fs.readFileSync('applications.json');
+    let applications = JSON.parse(data);
+    res.json(applications);
+    return;
+  } else {
+    res.json({message: 'not ok'});
+  }
+})
+
 app.get('/applications/:id', (req, res) => {
 
   let body = req.body;

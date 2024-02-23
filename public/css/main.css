@@ -175,6 +175,7 @@ a.light {
     background: linear-gradient(to right, #f04141, #f04141 50%, #BE3144 50%);
     background-clip: text;
     -webkit-background-clip: text;
+    text-decoration: none;
     -webkit-text-fill-color: transparent;
     background-size: 200% 100%;
     background-position: 100%;
