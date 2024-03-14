@@ -18,11 +18,11 @@
                 <green id="greendot">⬤</green>
                 <h2 id="text">Nameless &copy; 2024</h2>
             </header>
-            <img src="images/careers.png" style="height: 150px; width: auto;">
+            <img src="images/careers.png">
             <careers>
                 <div class="career-wrapper">
-                    <h1 id="backend" class="career">BACKEND DEVELOPER</h1>
-                    <description>
+                    <h1 id="backend" class="career">BACKEND</h1>
+                    <description id="backend2">
                         <h2>Requirements:</h2>
                         <h3>You must be flexible and able to test your backend code along with being able to debug it.</h3>
                         <h3>You must be skilled in backend developement</h3>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="career-wrapper">
                     <h1 id="photo" class="career">PHOTOGRAPHER</h1>
-                    <description>
+                    <description id="photographer">
                         <h2>Requirements:</h2>
                         <h3>You must be able to be flexible and be able to change a design easily.</h3>
                         <h3>You must be skilled in graphic design</h3>
@@ -39,15 +39,15 @@
                     </description>
                 </div>
                 <div class="career-wrapper">
-                    <h1 id="graphic" class="career">GRAPHIC DESIGNER</h1>
-                    <description>
+                    <h1 id="graphic" class="career">DESIGNER</h1>
+                    <description id="graphic2">
                         <h2>Requirements:</h2>
                         <h3>You must be able to be flexible and be able to change a design easily.</h3>
                         <h3>You must be skilled in graphic design</h3>
                         <h3>You must have the ability to respond when needed and work with others.</h3>
                     </description>
                 </div>
-                <h1 style="margin-top: 125px; font-size: 1.6em;" id="applybtn">APPLICATIONS</h1>
+                <h1 id="applybtn">APPLICATIONS</h1>
             </careers>
         </center>
     </wrapper>
@@ -86,6 +86,7 @@
             descriptionTags.forEach((element) => {
                 if (element !== event.target.nextElementSibling && element.classList.contains('show')) {
                     element.classList.remove('show');
+
                 }
             });
 

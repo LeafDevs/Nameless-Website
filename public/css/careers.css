@@ -1,17 +1,17 @@
 @font-face {
   font-family: 'Amore';
-  src: url('../fonts/Adequate-ExtraLight.ttf') format('truetype'); 
+  src: url('../fonts/Adequate-ExtraLight.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Munchkin Cream';
-  src: url('../fonts/Intro\ Cond\ Black\ Free.otf') format('opentype'); 
+  src: url('../fonts/Intro\ Cond\ Black\ Free.otf') format('opentype');
 }
 
 careers {
-    display: flex;
-    flex-direction: column;
-    margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
 }
 
 
@@ -19,7 +19,7 @@ careers h1 {
   font-family: 'Munchkin Cream', sans-serif;
   font-size: 2em;
   font-weight: 800;
-  left:250px;
+  left: 250px;
   color: royalblue;
   overflow: hidden;
   background: linear-gradient(to right, #FF0000, #FF0000 50%, #cf0000 50%);
@@ -47,6 +47,11 @@ careers h1.slide {
   position: relative;
   display: flex;
   flex-direction: column;
+}
+
+careers h1#applybtn {
+  margin-top: 125px; 
+  font-size: 1.6em;
 }
 
 careers description {
@@ -96,6 +101,116 @@ a {
   transition: background-position 655ms ease;
   margin-top: 125px;
 }
+
 a:hover {
   background-position: 0;
+}
+
+
+
+@media only screen and (max-width: 962px) {
+  careers {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+  }
+  
+  careers h1 {
+    font-family: 'Munchkin Cream', sans-serif;
+    font-size: 2em;
+    font-weight: 800;
+    color: royalblue;
+    overflow: hidden;
+    background: linear-gradient(to right, #FF0000, #FF0000 50%, #cf0000 50%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    background-position: 100%;
+    transition: background-position 0.65s ease, transform 1s ease;
+    cursor: pointer;
+    z-index: 1;
+    margin-bottom: 45px;
+  }
+
+  careers h1#applybtn {
+    margin-top: 225px; 
+    font-size: 1.6em;
+  }
+  
+  careers h1:hover {
+    background-position: 0%;
+  }
+  
+  careers h1.slide {
+    transform: translateX(-120px);
+  }
+  
+  career-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  careers description {
+    opacity: 0;
+    width: 90%; /* Adjusted width to be responsive */
+    height: auto;
+    background-color: rgb(228, 228, 228);
+    transition: left 1s ease, opacity 750ms ease;
+    position: absolute;
+    margin-top: 200px;
+    z-index: 0;
+    margin-left: 5px;
+  }
+
+  careers description#graphic2 {
+    margin-top: 55px;
+  }
+
+  careers description#photographer {
+    margin-top: 120px;
+  }
+  
+  careers description.show {
+    left: 0;
+    transform: translateY(25%);
+    opacity: 1;
+  }
+  
+  careers description h2 {
+    font-size: 20px;
+    color: #303030;
+  }
+  
+  careers description h3 {
+    font-size: 14px;
+    margin-top: 12px;
+  }
+  
+  careers a {
+    position: relative;
+    display: inline-block;
+    font-family: 'Munchkin Cream', sans-serif;
+    font-size: 1.75em;
+    font-weight: 800;
+    color: royalblue;
+    overflow: hidden;
+    cursor: pointer;
+    background: linear-gradient(to right, #f04141, #f04141 50%, #BE3144 50%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    background-position: 100%;
+    text-decoration: none;
+    transition: background-position 0.655s ease; /* Adjusted transition timing */
+    margin-top: 125px;
+  }
+  
+  careers a:hover {
+    background-position: 0;
+  }
+  
+
 }

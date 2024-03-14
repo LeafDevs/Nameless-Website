@@ -112,6 +112,10 @@ background-position: 0%;
   left: calc(100% - 22px);
 }
 
+img {
+  width: 850px;
+  height: auto;
+}
 
 
 /*
@@ -185,7 +189,7 @@ a.light:hover {
 background-position: 0 100%;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 962px) {
   body.light {
     background-color: #e5e5e5;
     font-family: 'Courier New', Courier, monospace;
@@ -237,5 +241,10 @@ background-position: 0 100%;
 
   a.light:hover {
     background-position: 100% 0;
+  }
+
+  img {
+    width: 400px;
+    height: auto;
   }
 }
