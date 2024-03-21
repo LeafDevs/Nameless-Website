@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nameless | Homepage</title>
+    <link id="theme" rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/colors.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kenia&family=Protest+Riot&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <wrapper>
+        <center>
+            <header>
+                <red id="reddot">⬤</red>
+                <yellow id="yellowdot">⬤</yellow>
+                <green id="greendot">⬤</green>
+                <h2 id="text">Nameless &copy; 2024</h2>
+            </header>
+            <h3>Passcode - <input type="text" id="passcode"></h3>
+            <h3 id="code" style="border-bottom: 3px red;"></h3>
+            <button onclick="getCode()" class="submit">SUBMIT</button>
+        </center>
+    </wrapper>
+</body>
+
+<script>
+
+const toggleLightClass = () => {
+  const elements = document.querySelectorAll('*');
+
+  elements.forEach(element => {
+    if(element.classList.contains('light')) {
+      element.classList.remove('light');
+    } else {  
+      element.classList.add('light');
+    }
+  });
+}
+
+toggleLightClass()
+
+
+const getCode = async () => {
+    const input = document.getElementById('passcode');
+    const passcode = input.value;
+
+    const data = {
+        passcode: passcode
+    }
+
+    const resp = await fetch('/api/v1/2fa', {
+        method: 'POST',
+        body: JSON.stringify({
+            data
+          }),
+        headers: {
+            "Content-Type": "application/json",
+        }
+    }).then(res => res.json());
+
+    document.getElementById('code').innerHTML = resp.otp;
+
+
+
+}
+
+    </script>
+
+</html>

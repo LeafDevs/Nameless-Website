@@ -150,6 +150,7 @@ app.post('/api/v1/auth', (req, res) => {
       token: token,
     });
 
+
     if (!verified) {
       res.json({message: 'Invalid 2FA token'});
       return;
@@ -161,6 +162,35 @@ app.post('/api/v1/auth', (req, res) => {
   res.json({ message: "Authorized Successfully" })
 })
 
+app.get('/2fa', (req, res) => {
+  res.render('code.ejs')
+})
+
+app.post('/api/v1/2fa', (req,res) => {
+  const { passcode } = req.body.data;
+
+  const pass = passcode.match('[^:]*$')[0];
+  const user = passcode.match('[^:]*')[0];
+
+  const users = JSON.parse(fs.readFileSync('users.json'));
+
+  console.log(`${users[user].username} = ${user} &&\n ${users[user].password} = ${pass}`)
+  if(!users[user]) {
+    res.json({ otp: 'Invalid Passcode (0x00FFaf34)' })
+    return;
+  }
+
+  if(users[user].username == user && users[user].password == pass) {
+    let secret = users[user].secret;
+    let otp = speakeasy.totp({
+      secret: secret.base32,
+      encoding: 'base32'
+    })
+    res.json({ otp: otp });
+    return;
+  }
+  res.json({ otp: 'Invalid Passcode (0x00FFaf44' });
+})
 
 app.post('/verify-2fa', (req, res) => {
   const userId = '1';

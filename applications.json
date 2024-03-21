@@ -19,5 +19,12 @@
         "phone": "number",
         "position": "Backend Developer",
         "portfolio": "portfolio.leafytea.host"
+    },
+    "735636": {
+        "name": "leaf",
+        "email": "admin@leafytea.host",
+        "phone": "4126030697",
+        "position": "developer",
+        "portfolio": "portfolio.leafytea.host"
     }
 }

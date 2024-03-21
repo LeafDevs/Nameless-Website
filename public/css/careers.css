@@ -143,7 +143,7 @@ a:hover {
   }
   
   careers h1.slide {
-    transform: translateX(-120px);
+    transform: translateX(0px);
   }
   
   career-wrapper {
@@ -157,24 +157,25 @@ a:hover {
     width: 90%; /* Adjusted width to be responsive */
     height: auto;
     background-color: rgb(228, 228, 228);
-    transition: left 1s ease, opacity 750ms ease;
+    transition: transform 1s ease, opacity 750ms ease;
     position: absolute;
     margin-top: 200px;
     z-index: 0;
     margin-left: 5px;
+    left: 50px
   }
 
   careers description#graphic2 {
-    margin-top: 55px;
+    margin-top: 25px;
   }
 
   careers description#photographer {
-    margin-top: 120px;
+    margin-top: 50px;
   }
   
   careers description.show {
-    left: 0;
-    transform: translateY(25%);
+    left: 50px;
+    transform: translateY(120px);
     opacity: 1;
   }
   

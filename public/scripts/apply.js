@@ -2,14 +2,6 @@
 const careers = document.querySelector('careers');
 const descriptions = document.querySelectorAll('description');
 
-const home = document.getElementById('home');
-const career = document.getElementById('careers');
-
-home.addEventListener('click', () => {
-    document.location.href = '/';});
-career.addEventListener('click', () => {
-    document.location.href = '/careers';});
-
 careers.addEventListener('click', (event) => {
 if (event.target.classList.contains('career')) {
     const descriptions = document.querySelectorAll('.career');
@@ -56,9 +48,11 @@ let answers = {
     phone: "",
     port: "",
     pos: "",
+    addy: "",
+    work: "",
 }
 
-const ids = ["name", "email", "phone", "port", "pos"];
+const ids = ["name", "email", "phone", "port", "pos", "work", "addy"];
 
 
 const submitApplication = () => {
