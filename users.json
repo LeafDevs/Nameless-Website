@@ -10,5 +10,17 @@
             "base32": "F43FKNC5IQ7UGYKUKRBWIMS3GUVGMMBT",
             "otpauth_url": "otpauth://totp/SecretKey?secret=F43FKNC5IQ7UGYKUKRBWIMS3GUVGMMBT"
         }
+    },
+    "bob": {
+        "id": 58684,
+        "username": "bob",
+        "email": "leaf",
+        "password": "2134123",
+        "secret": {
+            "ascii": "cE[$CkxyULqfP0E9hI7u",
+            "hex": "63455b24436b7879554c71665030453968493775",
+            "base32": "MNCVWJCDNN4HSVKMOFTFAMCFHFUESN3V",
+            "otpauth_url": "otpauth://totp/SecretKey?secret=MNCVWJCDNN4HSVKMOFTFAMCFHFUESN3V"
+        }
     }
 }

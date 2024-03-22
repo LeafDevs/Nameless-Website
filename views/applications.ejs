@@ -17,7 +17,7 @@
                 <green id="greendot">⬤</green>
                 <h2 id="text">Nameless &copy; 2024</h2>
             </header>
-            <button onclick="refresh()">Refresh</button>
+            <button onclick="loadApplications(true)">Refresh</button>
             <applications id="applications">
                 
             </applications>
@@ -40,9 +40,15 @@
 
         const apps = await fetch('/api/v1/applications').then(res => res.json());
 
+        const b = document.getElementById('applications')
+        if(refresh) {
+            console.log("[Nameless WS] | Refreshing Applications.")
+            b.innerHTML = " "
+        }
+
         Object.keys(apps).forEach((app) => {
             let a = apps[app];
-            let {name, phone, email, position, portfolio} = a;
+            let {name, phone, email, position, portfolio, addy, work} = a;
 
             let appFormat = 
             `<application>
@@ -53,12 +59,14 @@
                     <h3>What is your Phone Number? - <blue>${phone}</blue></h3>
                     <h3>What is your email? - <blue>${email}</blue></h3>
                     <h3>Do you have a portfolio? If so share it here. - <blue>${portfolio}</blue></h3>
+                    <h3>What is your address? - <blue>${addy}</blue></h3>
+                    <h3>What is your availale work hours per week?- <blue>${work}</blue></h3>
                     <button>ACCEPT</button>
                     <button>DELETE</button>
                 </questions>
             </application>`
 
-            let b = document.getElementById('applications').innerHTML += appFormat;
+            b.innerHTML += appFormat;
         })
 
         const applications = document.querySelectorAll('application');

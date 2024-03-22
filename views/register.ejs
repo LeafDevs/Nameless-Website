@@ -86,7 +86,9 @@ toggleLightClass()
         <h3>Scan the QR code using your Authy app or enter the following secret manually:</h3>
         <h3>${resp.secret}</h3>
         <br>
-        <img src="${resp.data_url}">
+        <h3>Passcode: ${resp.passcode} (<a href="/2fa">2fa</a>)</h3>
+        <br>
+        <img style="height: 150px; width: auto;" src="${resp.data_url}">
         `
 
 

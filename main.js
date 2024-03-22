@@ -65,6 +65,8 @@ app.post('/api/v1/apply', (req, res) => {
     phone: req.body.answers.phone,
     position: req.body.answers.pos,
     portfolio: req.body.answers.port,
+    work: req.body.answers.work,
+    addy: req.body.answers.addy,
   }
 
   fs.writeFileSync('applications.json', JSON.stringify(applications, null, 4));
@@ -169,28 +171,22 @@ app.get('/2fa', (req, res) => {
 app.post('/api/v1/2fa', (req,res) => {
   const { passcode } = req.body.data;
 
-  const pass = passcode.match('[^:]*$')[0];
-  const user = passcode.match('[^:]*')[0];
+  const passcodes = JSON.parse(fs.readFileSync('passcodes.json'));
 
-  const users = JSON.parse(fs.readFileSync('users.json'));
-
-  console.log(`${users[user].username} = ${user} &&\n ${users[user].password} = ${pass}`)
-  if(!users[user]) {
+  if(!passcodes[passcode]) {
+    // Passcode is not valid
     res.json({ otp: 'Invalid Passcode (0x00FFaf34)' })
     return;
   }
 
-  if(users[user].username == user && users[user].password == pass) {
-    let secret = users[user].secret;
-    let otp = speakeasy.totp({
-      secret: secret.base32,
-      encoding: 'base32'
-    })
-    res.json({ otp: otp });
-    return;
-  }
-  res.json({ otp: 'Invalid Passcode (0x00FFaf44' });
-})
+  let secret = passcodes[passcode].base32;
+  let otp = speakeasy.totp({
+    secret: secret,
+    encoding: 'base32'
+  })
+  res.json({ otp: otp });
+  return;
+});
 
 app.post('/verify-2fa', (req, res) => {
   const userId = '1';
@@ -251,11 +247,22 @@ app.post('/register', (req, res) => {
 
   const user = new User(Math.floor(Math.random() * 1000000), username, email, password, secret).save();
 
+
+  const passcode = Math.floor(Math.random() * 1000000)
+
+  const passcodes = JSON.parse(fs.readFileSync('passcodes.json'));
+
+
+  passcodes[passcode] = secret;
+
+
+  fs.writeFileSync('passcodes.json', JSON.stringify(passcodes, null, 4))
+
   QRCode.toDataURL(otpAuthUrl, (err, data_url) => {
     if (err) {
       res.status(500).send('Error generating QR code');
     } else {
-      res.json({ data_url, secret: secret.base32 });
+      res.json({ data_url, secret: secret.base32, passcode: passcode });
     }
   })
 
