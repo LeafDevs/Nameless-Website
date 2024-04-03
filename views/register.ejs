@@ -12,20 +12,25 @@
 </head>
 
 <body>
+    <!-- The wrapper that makes everything centered. -->
     <wrapper>
+        <!--The center part of the page. The center box.-->
         <center>
+            <!-- Header for the center box. -->
             <header>
                 <red id="reddot">⬤</red>
                 <yellow id="yellowdot">⬤</yellow>
                 <green id="greendot">⬤</green>
                 <h2 id="text">Nameless &copy; 2024</h2>
             </header>
+            <!-- The image for the logo underneath the header. -->
             <img src="images/logo.png" style="height: 150px; width: auto;">
+            <!-- The register box used for getting the stuff. Also what is replaced for the QRCode and 2FA Stuff. -->
             <div id="kyu-kyu">
                 <h3>Email - <input type="input" id="email"></h3>
                 <h3>Username - <input type="text" id="user"></h3>
                 <h3>Password - <input type="text" id="pass"></h3>
-    
+                <!-- Submit button :) -->
                 <button onclick="submit()" class="submit">SUBMIT</button>
             </div>
 
@@ -35,6 +40,7 @@
 </body>
 
 <script>
+
 
 const toggleLightClass = () => {
   const elements = document.querySelectorAll('*');
@@ -50,6 +56,9 @@ const toggleLightClass = () => {
 
 toggleLightClass()
 
+     /**
+      * Submits the account registration to the /register endpoint.
+     */
     const submit = async () => {
 
         console.log("submitted")
@@ -57,9 +66,9 @@ toggleLightClass()
         const user = document.getElementById('user').value
         const email = document.getElementById('email').value;
 
-        const authKey = '<%=authKey%>';
+        const authKey = '<%=authKey%>'; // When accessing this site it puts the AuthKey sent to the page via ExpressJS
 
-        const data = {
+        const data = { // User data.
             name: user,
             email: email,
             password: pass,
@@ -68,7 +77,7 @@ toggleLightClass()
 
         console.log(data);
 
-        const resp = await fetch('/register', {
+        const resp = await fetch('/register', { // Sends the request to /register for it to be processed.
             method: 'POST',
             body: JSON.stringify({
                 data
@@ -81,6 +90,7 @@ toggleLightClass()
 
         console.log(resp);
 
+        // Rewrites the HTML inside the element with the id 'kyu-kyu'
         document.getElementById('kyu-kyu').innerHTML = `
         <br>
         <h3>Scan the QR code using your Authy app or enter the following secret manually:</h3>

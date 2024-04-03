@@ -14,14 +14,18 @@
 </head>
 
 <body>
+    <!-- Wrapper for centering everything. -->
     <wrapper>
+        <!-- Center box that holds the page. -->
         <center>
+            <!-- Header that contains the information like name of the brand. and just some cosemetic stuff. -->
             <header>
                 <red id="reddot">⬤</red>
                 <yellow id="yellowdot">⬤</yellow>
                 <green id="greendot">⬤</green>
                 <h2 id="text">Nameless &copy; 2024</h2>
             </header>
+            <!-- Where the user inputs the passcode for getting the 2FA code -->
             <h3>Passcode - <input type="text" id="passcode"></h3>
             <h3 id="code" style="border-bottom: 3px red;"></h3>
             <button onclick="getCode()" class="submit">SUBMIT</button>
@@ -45,7 +49,9 @@ const toggleLightClass = () => {
 
 toggleLightClass()
 
-
+ /**
+    Gets the code from the passcode provided inside of the element with id 'passcode'.
+     */
 const getCode = async () => {
     const input = document.getElementById('passcode');
     const passcode = input.value;
@@ -54,7 +60,7 @@ const getCode = async () => {
         passcode: passcode
     }
 
-    const resp = await fetch('/api/v1/2fa', {
+    const resp = await fetch('/api/v1/2fa', { // fetches from the /api/v1/2fa and provides the passcode and recives the OTP stuff.
         method: 'POST',
         body: JSON.stringify({
             data
@@ -64,7 +70,7 @@ const getCode = async () => {
         }
     }).then(res => res.json());
 
-    document.getElementById('code').innerHTML = resp.otp;
+    document.getElementById('code').innerHTML = resp.otp; // displays the OTP on screen.
 
 
 

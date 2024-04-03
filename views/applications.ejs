@@ -9,16 +9,20 @@
 </head>
 
 <body>
+    <!-- Wrapper for centering things. -->
     <wrapper>
+        <!-- The center box that contains the page's content. -->
         <center>
+            <!-- Header for the centered box. -->
             <header>
                 <red id="reddot">⬤</red>
                 <yellow id="yellowdot">⬤</yellow>
                 <green id="greendot">⬤</green>
                 <h2 id="text">Nameless &copy; 2024</h2>
             </header>
+            <!-- Contains all the applications. With the ability to refresh them. -->
             <button onclick="loadApplications(true)">Refresh</button>
-            <applications id="applications">
+            <applications id="applications"> 
                 
             </applications>
             </div>
@@ -38,15 +42,15 @@
      */
     const loadApplications = async (refresh=false) => {
 
-        const apps = await fetch('/api/v1/applications').then(res => res.json());
+        const apps = await fetch('/api/v1/applications').then(res => res.json()); // Fetches the applications from the route.
 
         const b = document.getElementById('applications')
-        if(refresh) {
+        if(refresh) { // Checks if the refresh var is true.
             console.log("[Nameless WS] | Refreshing Applications.")
             b.innerHTML = " "
         }
 
-        Object.keys(apps).forEach((app) => {
+        Object.keys(apps).forEach((app) => { // With the applications loops through them and adds them to the applications div.
             let a = apps[app];
             let {name, phone, email, position, portfolio, addy, work} = a;
 
@@ -61,17 +65,15 @@
                     <h3>Do you have a portfolio? If so share it here. - <blue>${portfolio}</blue></h3>
                     <h3>What is your address? - <blue>${addy}</blue></h3>
                     <h3>What is your availale work hours per week?- <blue>${work}</blue></h3>
-                    <button>ACCEPT</button>
-                    <button>DELETE</button>
                 </questions>
             </application>`
 
             b.innerHTML += appFormat;
         })
 
-        const applications = document.querySelectorAll('application');
+        const applications = document.querySelectorAll('application'); // Gets all the just put down applications.
 
-        applications.forEach(app => {
+        applications.forEach(app => {  // For each of them it adds a click event listener which adds the drop down animation for the questions.
 
             app.addEventListener('click', (e) => {
 
@@ -101,40 +103,7 @@
         });
     }
 
-    const addLightClass = () => {
-        const elements = document.querySelectorAll('*');
-
-        elements.forEach(element => {
-            element.classList.add('light');
-        });
-    }
-
-    toggleLightClass()
-
-    const submit = async () => {
-        const user = document.getElementById('user').value;
-        const pass = document.getElementById('pass').value;
-        const token = document.getElementById('token').value;
-
-        const id = String.valueOf(249866);
-
-        let data = {
-            username: user,
-            password: pass,
-            token: token,
-        }
-
-        const resp = await fetch('/api/v1/auth', {
-        method: 'POST',
-        body: JSON.stringify({
-            data
-          }),
-        headers: {
-            "Content-Type": "application/json",
-        }
-    }).then(res => res.json());
-        document.getElementById('err').innerHTML = resp.message;
-    }
+    toggleLightClass();
 
 
 </script>
