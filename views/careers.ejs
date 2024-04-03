@@ -74,43 +74,47 @@
             document.location.href="/apply"
         })
 
-        // Handles the 
-
+        // Add an event listener to the 'careers' element, which listens for clicks
         careers.addEventListener('click', (event) => {
-        if (event.target.classList.contains('career')) {
-            const descriptions = document.querySelectorAll('.career');
-            const descriptionTags = document.querySelectorAll('description');
-
-            descriptions.forEach((element) => {
-                element.classList.add('slide');
-            });
-
-            descriptionTags.forEach((element) => {
-                if (element !== event.target.nextElementSibling && element.classList.contains('show')) {
-                    element.classList.remove('show');
-
-                }
-            });
-
-            const description = event.target.nextElementSibling;
-            description.classList.toggle('show');
-
-            let i = 0;
-            descriptionTags.forEach((element) => {
-                if(!element.classList.contains("show")) {
-                    i++;
-            
-                }
-            })
-
-            if(i==3) {
-                descriptions.forEach((desc) => {
-                    desc.classList.remove('slide');
+            // Check if the clicked element has the class 'career'
+            if (event.target.classList.contains('career')) {
+                // Select all elements with the class 'career' and 'description'
+                const descriptions = document.querySelectorAll('.career');
+                const descriptionTags = document.querySelectorAll('description');
+        
+                // Add the 'slide' class to all elements with the class 'career'
+                descriptions.forEach((element) => {
+                    element.classList.add('slide');
+                });
+        
+                // Loop through each 'description' element
+                descriptionTags.forEach((element) => {
+                    // If the element is not the next sibling of the clicked element and has the class 'show', remove the class 'show'
+                    if (element !== event.target.nextElementSibling && element.classList.contains('show')) {
+                        element.classList.remove('show');
+                    }
+                });
+        
+                // Toggle the 'show' class of the next sibling of the clicked element
+                const description = event.target.nextElementSibling;
+                description.classList.toggle('show');
+        
+                // Count the number of 'description' elements that do not have the class 'show'
+                let i = 0;
+                descriptionTags.forEach((element) => {
+                    if (!element.classList.contains("show")) {
+                        i++;
+                    }
                 })
+        
+                // If there are three 'description' elements without the class 'show', remove the 'slide' class from all elements with the class 'career'
+                if (i == 3) {
+                    descriptions.forEach((desc) => {
+                        desc.classList.remove('slide');
+                    })
+                }
             }
-
-        }
-    });
+        });
 
 
 
