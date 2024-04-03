@@ -18,11 +18,11 @@
     "217218": {
         "name": "Leaf Gamma",
         "email": "leaf@emails.leafytea.host",
-        "phone": "4120631412",
+        "phone": "phone",
         "position": "Graphic Designer",
         "portfolio": "portfolio.leafytea.host",
         "work": "30",
-        "addy": "307 Bridge Street Tarentum PA 15084"
+        "addy": "I leaked my address again in commits :p"
     },
     "249866": {
         "name": "leaf",
@@ -41,7 +41,7 @@
     "735636": {
         "name": "leaf",
         "email": "admin@leafytea.host",
-        "phone": "4126030697",
+        "phone": "phone",
         "position": "developer",
         "portfolio": "portfolio.leafytea.host"
     }
