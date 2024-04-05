@@ -69,4 +69,5 @@ const submitApplication = () => {
             "Content-Type": "application/json",
         }
     })
+    document.getElementById("replace").innerHTML = "<h1>Application Submitted!</h1>"
 }
